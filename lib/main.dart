@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_practice_1/big_album.dart';
+import 'package:flutter_practice_1/extensions.dart';
+import 'package:flutter_practice_1/mini_album.dart';
 import 'package:flutter_practice_1/rounded_image.dart';
 import 'package:flutter_practice_1/title_row.dart';
 
@@ -54,7 +56,7 @@ class HomePage extends StatelessWidget {
           //
         ),
         children: [
-          SizedBox(height: 20),
+          20.h,
           // 상단 이미지
           // AspectRatio
           AspectRatio(
@@ -62,8 +64,10 @@ class HomePage extends StatelessWidget {
             aspectRatio: 2.5 / 1,
             child: RoundedImage(imageUrl: 'https://picsum.photos/300/200'),
           ),
+          20.h,
           // 제목행
           TitleRow(title: "New Albums"),
+          10.h,
           // 큰앨범들어가는 로우
           Row(
             children: [
@@ -88,7 +92,22 @@ class HomePage extends StatelessWidget {
 
           // 제목행
           TitleRow(title: "Song List"),
-          // TODO 작은앨범들어가는 로우
+          // 작은앨범들어가는 로우
+          MiniAlbum(
+            imageUrl: 'https://picsum.photos/id/222/200/200',
+            title: '가을안부',
+            artist: '먼데이키즈',
+          ),
+          MiniAlbum(
+            imageUrl: 'https://picsum.photos/id/228/200/200',
+            title: '죄와 벌',
+            artist: 'SG워너비',
+          ),
+          MiniAlbum(
+            imageUrl: 'https://picsum.photos/id/123/200/200',
+            title: 'Go Away',
+            artist: '투애니원',
+          ),
         ],
       ),
     );
@@ -138,7 +157,7 @@ class HomePage extends StatelessWidget {
                   //
                 ),
               ),
-              SizedBox(width: 3),
+              3.w,
               Container(
                 width: 5,
                 height: 5,
