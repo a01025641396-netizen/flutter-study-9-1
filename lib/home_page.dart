@@ -58,33 +58,37 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    print("위젯 그리기 시작");
-    List<Widget> listViewChildren = [];
-    for (var index = 0; index < postList.length; index++) {
-      Post p = postList[index];
-      Widget item = Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          border: BoxBorder.all(),
-        ),
-        padding: EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text("포스트 아이디 :${p.id}"),
-            Text("사용자 아이디 :${p.userId}"),
-            Text("제목 :${p.title}"),
-            Text("내용 :${p.body}"),
-          ],
-        ),
-      );
-      listViewChildren.add(item);
-    }
     // ListView 의 children 속성에 들어갈 리스트 만들기
     // 반복문 이용해서 postList 내에 모든 요소 위젯으로 만들기
     return Scaffold(
       appBar: AppBar(title: Text('블로그 샘플')),
-      body: ListView(padding: EdgeInsets.all(20), children: listViewChildren),
+      //ListView.builder : itemCount 속성에 정의한 갯수만큼
+      // item
+      body: ListView.builder(
+        padding: EdgeInsets.all(20),
+        itemCount: postList.length,
+        itemBuilder: (context, index) {
+          print(index);
+          Post p = postList[index];
+          Widget item = Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              border: BoxBorder.all(),
+            ),
+            padding: EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("포스트 아이디 :${p.id}"),
+                Text("사용자 아이디 :${p.userId}"),
+                Text("제목 :${p.title}"),
+                Text("내용 :${p.body}"),
+              ],
+            ),
+          );
+          return item;
+        },
+      ),
     );
   }
 }
