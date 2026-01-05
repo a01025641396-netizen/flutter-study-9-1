@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_practice_1/speed.dart';
+import 'package:flutter_practice_1/temp.dart';
 import 'package:flutter_practice_1/weather.dart';
 import 'package:http/http.dart';
 
@@ -9,10 +11,12 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
+// 의존성 주입!
 class _HomePageState extends State<HomePage> {
-  String displayTemp = "";
+  Weather? weather;
+
   @override
-  Widget build(Object context) {
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("오늘의 날씨")),
       body: SizedBox(
@@ -21,27 +25,9 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text("-10도씨", style: TextStyle(fontSize: 36)),
-            IconButton(
-              onPressed: () async {
-                // 1. 데이터 달라고 편지 쓰기! -> http 통신GET 요청
-                Client httpClient = Client(); // http 통신을 하기위한 객체!
-                Uri target = Uri.parse(
-                  "https://api.open-meteo.com/v1/forecast?latitude=37.57&longitude=126.98&current_weather=true",
-                );
-                Response r = await httpClient.get(target);
-                // 2. 정보가 담긴 답장 받기
-                print(r.statusCode); //편지가 정상적으로 전달되고 답장을 받았는지
-                print(r.body); //답장 내용
-                // 3. 답장내용(JSON)을 Map으로 변경
-                Map<String, dynamic> jsonMap = jsonDecode(r.body);
-                // 4.Map을 객체로 변경(3~4 : 역직렬화)
-                Weather w = Weather.fromJson(jsonMap);
-                displayTemp =
-                    "${w.currentWeather.temperature}${w.currentWeatherUnits.temperature}";
-              },
-              icon: Icon(Icons.refresh),
-            ),
+            if (weather != null) Temp(weather: weather!),
+            if (weather != null) Speed(weather: weather!),
+            IconButton(onPressed: () async {}, icon: Icon(Icons.refresh)),
           ],
         ),
       ),
