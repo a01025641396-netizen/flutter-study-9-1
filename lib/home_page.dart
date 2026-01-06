@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_practice_1/refresh_button.dart';
 import 'package:flutter_practice_1/speed.dart';
 import 'package:flutter_practice_1/temp.dart';
 import 'package:flutter_practice_1/weather.dart';
@@ -25,9 +26,11 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            if (weather != null) Temp(weather: weather!),
-            if (weather != null) Speed(weather: weather!),
-            IconButton(onPressed: () async {}, icon: Icon(Icons.refresh)),
+            Temp(),
+            Speed(),
+            // if (weather != null) Temp(weather: weather!),
+            // if (weather != null) Speed(weather: weather!),
+            RefreshButton(),
           ],
         ),
       ),
