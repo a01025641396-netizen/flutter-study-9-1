@@ -5,11 +5,7 @@ import 'package:flutter_practice_1/firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    // name:
-    //     "NOT_DEFAULT", // prevent `A Firebase App named "[DEFAULT]" already exists`
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   runApp(const MyApp());
 }
@@ -74,8 +70,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
       // 2. 위에서 만든 컬렉션 참조로 문서 만들기
       Map<String, dynamic> data = {
-        '상호명': '이재모피자',
-        '주소': '부산광역시 부산진구',
+        '상호명': '도미노피자',
+        '주소': '경기도광주',
         '맛': '기대보다 별로',
       };
       colRef.add(data);
