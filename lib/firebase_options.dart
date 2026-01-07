@@ -83,4 +83,5 @@ class DefaultFirebaseOptions {
     authDomain: 'flutter-easy-f91e8.firebaseapp.com',
     storageBucket: 'flutter-easy-f91e8.firebasestorage.app',
   );
+
 }
