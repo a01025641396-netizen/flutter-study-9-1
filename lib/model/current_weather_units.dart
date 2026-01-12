@@ -1,31 +1,20 @@
-class CurrentWeatherUnits {
-  final String time;
-  final String interval;
-  final String temperature;
-  final String windspeed;
-  final String winddirection;
-  final String isDay;
-  final String weathercode;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  CurrentWeatherUnits({
-    required this.time,
-    required this.interval,
-    required this.temperature,
-    required this.windspeed,
-    required this.winddirection,
-    required this.isDay,
-    required this.weathercode,
-  });
+part 'current_weather_units.freezed.dart';
+part 'current_weather_units.g.dart';
 
-  factory CurrentWeatherUnits.fromJson(Map<String, dynamic> json) {
-    return CurrentWeatherUnits(
-      time: json['time'] ?? '',
-      interval: json['interval'] ?? '',
-      temperature: json['temperature'] ?? '',
-      windspeed: json['windspeed'] ?? '',
-      winddirection: json['winddirection'] ?? '',
-      isDay: json['is_day'] ?? '',
-      weathercode: json['weathercode'] ?? '',
-    );
-  }
+@freezed
+abstract class CurrentWeatherUnits with _$CurrentWeatherUnits {
+  const factory CurrentWeatherUnits({
+    required String time,
+    required String interval,
+    required String temperature,
+    required String windspeed,
+    required String winddirection,
+    @JsonKey(name: "is_day") required String isDay,
+    required String weathercode,
+  }) = _CurrentWeatherUnits;
+
+  factory CurrentWeatherUnits.fromJson(Map<String, dynamic> json) =>
+      _$CurrentWeatherUnitsFromJson(json);
 }

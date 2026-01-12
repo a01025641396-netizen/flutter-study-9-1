@@ -1,43 +1,28 @@
-import 'package:flutter_practice_1/model/current_weather.dart';
-import 'package:flutter_practice_1/model/current_weather_units.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'current_weather_units.dart';
+import 'current_weather.dart';
 
-class Weather {
-  final double latitude;
-  final double longitude;
-  final double generationTimeMs;
-  final int utcOffsetSeconds;
-  final String timezone;
-  final String timezoneAbbreviation;
-  final double elevation;
-  final CurrentWeatherUnits currentWeatherUnits;
-  final CurrentWeather currentWeather;
+part 'weather.freezed.dart';
+part 'weather.g.dart';
 
-  Weather({
-    required this.latitude,
-    required this.longitude,
-    required this.generationTimeMs,
-    required this.utcOffsetSeconds,
-    required this.timezone,
-    required this.timezoneAbbreviation,
-    required this.elevation,
-    required this.currentWeatherUnits,
-    required this.currentWeather,
-  });
+// @Freezed 내부에 @JsonSerializable 설정을 추가합니다.
+@freezed
+abstract class Weather with _$Weather {
+  const factory Weather({
+    required double latitude,
+    required double longitude,
+    @JsonKey(name: 'generationtime_ms') required double generationTimeMs,
+    @JsonKey(name: 'utc_offset_seconds') required int utcOffsetSeconds, // 추가
+    required String timezone,
+    @JsonKey(name: 'timezone_abbreviation')
+    required String timezoneAbbreviation, // 추가
+    required double elevation,
+    @JsonKey(name: 'current_weather_units')
+    required CurrentWeatherUnits currentWeatherUnits, // 추가
+    @JsonKey(name: 'current_weather')
+    required CurrentWeather currentWeather, // 추가
+  }) = _Weather;
 
-  // JSON 데이터를 객체로 변환하는 네임드 생성자
-  factory Weather.fromJson(Map<String, dynamic> json) {
-    return Weather(
-      latitude: json['latitude']?.toDouble() ?? 0.0,
-      longitude: json['longitude']?.toDouble() ?? 0.0,
-      generationTimeMs: json['generationtime_ms']?.toDouble() ?? 0.0,
-      utcOffsetSeconds: json['utc_offset_seconds'] ?? 0,
-      timezone: json['timezone'] ?? '',
-      timezoneAbbreviation: json['timezone_abbreviation'] ?? '',
-      elevation: json['elevation']?.toDouble() ?? 0.0,
-      currentWeatherUnits: CurrentWeatherUnits.fromJson(
-        json['current_weather_units'],
-      ),
-      currentWeather: CurrentWeather.fromJson(json['current_weather']),
-    );
-  }
+  factory Weather.fromJson(Map<String, dynamic> json) =>
+      _$WeatherFromJson(json);
 }

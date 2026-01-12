@@ -1,11 +1,8 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_practice_1/refresh_button.dart';
 import 'package:flutter_practice_1/speed.dart';
 import 'package:flutter_practice_1/temp.dart';
-import 'package:flutter_practice_1/weather.dart';
-import 'package:http/http.dart';
+import 'package:flutter_practice_1/model/weather.dart';
 
 class HomePage extends StatefulWidget {
   @override
