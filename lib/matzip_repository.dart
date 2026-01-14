@@ -8,8 +8,19 @@ class MatzipRepository {
 
     // 켈렉션 모든 문서들 가지고오기
     final colRef = FirebaseFirestore.instance.collection('matzip');
+    final result1 = await colRef.get();
+    final docs = result1.docs;
 
+    for (var i = 0; i < docs.length; i++) {
+      QueryDocumentSnapshot e = docs[i];
+      e.data();
+    }
     //List -> Map
+    List<Matzip> matzipList =
+        docs.map((e) {
+          return Matzip.fromJson(e.data());
+        }).toList();
+
     //맛집리스트로 변환
     //맛집리스트 반환
     return [];
